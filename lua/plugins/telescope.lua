@@ -44,20 +44,27 @@ return {
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			-- Directory-specific searches
+			local home = os.getenv("HOME")
+
 			vim.keymap.set("n", "<leader>sh", function()
-				builtin.find_files({ cwd = vim.fn.expand("~") })
+				builtin.find_files({ cwd = home })
 			end, { desc = "[S]earch [H]ome directory" })
 
 			vim.keymap.set("n", "<leader>sc", function()
-				builtin.find_files({ cwd = "C:\\" })
-			end, { desc = "[S]earch [C]: drive" })
+				builtin.find_files({ cwd = "/" })
+			end, { desc = "[S]earch [C] Root directory" })
 
 			vim.keymap.set("n", "<leader>sp", function()
-				builtin.find_files({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] })
+				local root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+				if vim.fn.isdirectory(root) == 1 then
+					builtin.find_files({ cwd = root })
+				else
+					vim.notify("Not inside a Git repository", vim.log.levels.WARN)
+				end
 			end, { desc = "[S]earch [P]roject root" })
 
 			vim.keymap.set("n", "<leader>sd", function()
-				builtin.find_files({ cwd = vim.fn.expand("~/Desktop") })
+				builtin.find_files({ cwd = home .. "/Desktop" })
 			end, { desc = "[S]earch [D]esktop" })
 
 			-- Advanced searches
@@ -81,3 +88,4 @@ return {
 		end,
 	},
 }
+
