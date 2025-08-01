@@ -47,3 +47,19 @@ vim.keymap.set("n", "<leader>tc", ":ToggleTermToggleAll<CR>", { desc = "[T]ermin
 -- Different layouts
 vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<CR>", { desc = "[T]erminal [F]loating" })
 vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical size=80<CR>", { desc = "[T]erminal [V]ertical" })
+
+-- Lazygit integration with toggleterm
+local Terminal = require("toggleterm.terminal").Terminal
+local lazygit = Terminal:new({
+	cmd = "lazygit",
+	hidden = true,
+	direction = "float",
+	float_opts = {
+		border = "double",
+	},
+})
+
+vim.keymap.set("n", "<leader>gg", function()
+	lazygit:toggle()
+end, { desc = "Toggle Lazygit (floating)" })
+

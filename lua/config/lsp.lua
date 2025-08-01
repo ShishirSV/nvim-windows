@@ -101,7 +101,7 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 -- Language servers configuration
 local servers = {
 	clangd = {
-		cmd = { "wsl", "clangd", "--compile-commands-dir=.", "--header-insertion=never", "--std=c++23" },
+		cmd = { "clangd", "--compile-commands-dir=.", "--header-insertion=never", "--std=c++23" },
 		filetypes = { "c", "cpp" },
 	},
 	-- gopls = {},
@@ -138,4 +138,3 @@ require("mason-lspconfig").setup({
 		end,
 	},
 })
-

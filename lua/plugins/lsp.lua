@@ -16,6 +16,7 @@ return {
 	-- Main LSP configuration
 	{
 		"neovim/nvim-lspconfig",
+		lazy = false,
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
 			"mason-org/mason-lspconfig.nvim",
@@ -93,7 +94,10 @@ return {
 			keymap = { preset = "default" },
 			appearance = { nerd_font_variant = "mono" },
 			completion = {
-				documentation = { auto_show = true, auto_show_delay_ms = 100 },
+				documentation = { auto_show = true, auto_show_delay_ms = 10 },
+				ghost_text = {
+					enabled = true,
+				},
 			},
 			sources = {
 				default = { "lsp", "path", "snippets", "lazydev" },

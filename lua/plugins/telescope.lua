@@ -42,6 +42,9 @@ return {
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader>sa", function()
+				require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
+			end, { desc = "Find All Files (incl. hidden)" })
 
 			-- Directory-specific searches
 			local home = os.getenv("HOME")
@@ -88,4 +91,3 @@ return {
 		end,
 	},
 }
-
